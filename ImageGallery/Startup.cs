@@ -31,7 +31,6 @@ namespace ImageGallery
             services.AddResponseCaching();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IImageService, ImageService>();
             services.AddSingleton<IAlbumService, FileBackedAlbumService>();
         }
 

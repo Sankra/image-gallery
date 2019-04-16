@@ -31,7 +31,6 @@ namespace ImageGallery.Services
 
         public async Task AddImagesToAlbumWithId(string albumId, List<IFormFile> files)
         {
-
             var album = await GetAlbum(albumId);
             foreach (var formFile in files)
             {
@@ -40,11 +39,8 @@ namespace ImageGallery.Services
                     await AddImageToAlbumWithId(album, formFile);
                 }
             }
-            await SaveAlbum(album);
-            // TODO: create pre render
-            // TODO: create thumbnail in thumbs folder in album
-            // TODO: save
 
+            await SaveAlbum(album);
         }
 
         public async Task<byte[]> GetThumbnail(string albumId, string imageId)
