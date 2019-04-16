@@ -30,6 +30,7 @@
     <Folder Include="Views\Album\" />
     <Folder Include="Utility\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Views\ImageView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\_ViewImports.cshtml" />

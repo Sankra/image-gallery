@@ -18,7 +18,7 @@
 <section id="photos">
     @foreach (var image in Model.Images)
     {
-        <a href="/Image/@Model.Id/@image.Id">
+        <a href="/ImageView/@Model.Id/@image.Id">
             <img class="lazyload zoom" src="/PreRender/@Model.Id/@image.Id" data-src="/Thumbnail/@Model.Id/@image.Id">
         </a>
     }
