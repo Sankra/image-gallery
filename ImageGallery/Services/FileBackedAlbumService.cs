@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace ImageGallery.Services
             var albumPath = Path.Combine(albumsPath, id);
             var content = await File.ReadAllTextAsync(albumPath + ".json");
             var album = JsonConvert.DeserializeObject<Album>(content);
+            album.OrderByDateTaken();
             return album;
         }
 
@@ -50,7 +52,6 @@ namespace ImageGallery.Services
             return await File.ReadAllBytesAsync(filePath);
         }
 
-        // TODO: Order by time taken in exif, if no exist, write todays date
         // TODO: image metadata during save
         // TODO: images in album
         // TODO: Show full version with metadata
@@ -76,7 +77,7 @@ namespace ImageGallery.Services
                 return;
             }
 
-            // TODO: If I need byte[]
+            // If I need byte[]
             //using (var memoryStream = new MemoryStream())
             //{
             //    await model.AvatarImage.CopyToAsync(memoryStream);
@@ -98,23 +99,35 @@ namespace ImageGallery.Services
 
             var thumbsPath = Path.Combine(albumPath, "thumbs");
             Directory.CreateDirectory(thumbsPath);
-            const int MaxThubSize = 400;
             using (var image = new MagickImage(filePath))
             {
-                if (image.Width > image.Height)
+                var thumbPath = Path.Combine(thumbsPath, Path.GetFileName(filePath));
+                var exif = image.GetExifProfile();
+                using (var thumbnail = exif?.CreateThumbnail())
                 {
-                    if (image.Width > MaxThubSize)
+                    if (thumbnail == null)
                     {
-                        image.Resize(MaxThubSize, 0);
+                        const int MaxThubSize = 400;
+                        if (image.Width > image.Height)
+                        {
+                            if (image.Width > MaxThubSize)
+                            {
+                                image.Resize(MaxThubSize, 0);
+                            }
+                        }
+                        else if (image.Height > MaxThubSize)
+                        {
+                            image.Resize(0, MaxThubSize);
+                        }
+
+                        image.Write(thumbPath);
                     }
-                } 
-                else if (image.Height > MaxThubSize)
-                {
-                    image.Resize(0, MaxThubSize);
+                    else
+                    {
+                        thumbnail.Write(thumbPath);
+                    }
                 }
 
-                var thumbPath = Path.Combine(thumbsPath, Path.GetFileName(filePath));
-                image.Write(thumbPath);
                 optimizer.OptimalCompression = true;
                 optimizer.Compress(thumbPath);
 
@@ -125,9 +138,19 @@ namespace ImageGallery.Services
                 var preRender = new MagickImage(MagickColor.FromRgb(120, 60, 30), image.Width, image.Height);
                 preRender.Write(preRenderPath);
                 optimizer.Compress(preRenderPath);
-            }
 
-            album.Images.Add(new Image(imageId));
+                var dateTaken = DateTime.UtcNow;
+                var exifDateTime = exif?.GetValue(ExifTag.DateTime);
+                if (exifDateTime != null)
+                {
+                    if (DateTime.TryParseExact((string)exifDateTime.Value, "yyyy:MM:dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+                    {
+                        dateTaken = dateTime;
+                    }
+                }
+
+                album.AddImage(new Image(imageId, dateTaken));
+            }
         }
 
         async Task SaveAlbum(Album album)
