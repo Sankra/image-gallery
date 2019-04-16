@@ -66,6 +66,12 @@ namespace ImageGallery.Services
             return await File.ReadAllBytesAsync(filePath);
         }
 
+        public async Task<byte[]> GetImage(string albumId, string imageId)
+        {
+            var filePath = Path.Combine(albumsPath, albumId, imageId);
+            return await File.ReadAllBytesAsync(filePath);
+        }
+
         async Task AddImageToAlbumWithId(Album album, IFormFile file)
         {
             var kindParts = file.ContentType.Split('/');
