@@ -14,7 +14,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Magick.NET-Q8-x64" Version="7.12.0" />
   </ItemGroup>
@@ -30,6 +29,7 @@
     <Folder Include="Services\" />
     <Folder Include="Views\Album\" />
     <Folder Include="Utility\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\_ViewImports.cshtml" />

@@ -135,7 +135,5 @@ namespace ImageGallery.Services
             var content = JsonConvert.SerializeObject(album);
             await File.WriteAllTextAsync(Path.Combine(albumsPath, album.Id) + ".json", content);
         }
-
-
     }
 }

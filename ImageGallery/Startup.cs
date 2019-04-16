@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ImageGallery.Configuration;
 using ImageGallery.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,15 @@ namespace ImageGallery
             services.AddResponseCaching();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IAlbumService, FileBackedAlbumService>();
+            Enum.TryParse(Configuration["BackingStore"], out BackingStore backingStore);
+            switch (backingStore)
+            {
+                case BackingStore.File:
+                    services.AddSingleton<IAlbumService, FileBackedAlbumService>();
+                    break;
+                default:
+                    throw new ArgumentException("BackingStore must be either file or TODO");
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
