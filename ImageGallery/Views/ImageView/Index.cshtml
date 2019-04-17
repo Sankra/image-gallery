@@ -3,4 +3,8 @@
     <img class="center-fit" src="/Image/@Model.AlbumId/@Model.ImageId">
 </a>
 <h1>Image</h1>
-<button>Delete</button>
+
+<form method="post">
+    <button asp-controller="ImageView" asp-action="Delete">Delete</button>
+</form>
+

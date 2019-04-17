@@ -21,11 +21,12 @@ namespace ImageGallery.Controllers
             this.albumService = albumService;
         }
 
-        [HttpGet("{id}/{imageId}")]
-        public async Task<IActionResult> Get(string id, string imageId)
+        [HttpGet("{width}/{height}")]
+        public async Task<IActionResult> Get(string width, string height)
         {
-            var image = await albumService.GetPreRenders(id, imageId);
-            return File(image, "image/" + ContentType.GetFromFileName(imageId));
+            var image = await albumService.GetPreRenders(ushort.Parse(width), ushort.Parse(height));
+            // TODO: content type  from something
+            return File(image, "image/png");
         }
     }
 }

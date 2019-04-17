@@ -19,7 +19,7 @@
     @foreach (var image in Model.Images)
     {
         <a href="/ImageView/@Model.Id/@image.Id">
-            <img class="lazyload zoom" src="/PreRender/@Model.Id/@image.Id" data-src="/Thumbnail/@Model.Id/@image.Id">
+            <img class="lazyload zoom" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id" width="@image.Width" height="@image.Height">
         </a>
     }
 </section>

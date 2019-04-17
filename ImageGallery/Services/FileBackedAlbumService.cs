@@ -14,16 +14,20 @@ namespace ImageGallery.Services
     public class FileBackedAlbumService : IAlbumService
     {
         readonly string albumsPath;
+        readonly string preRendersPath;
 
         public FileBackedAlbumService()
         {
             var currentFolder = Directory.GetCurrentDirectory();
             albumsPath = Path.Combine(currentFolder, "albums");
             Directory.CreateDirectory(albumsPath);
+            preRendersPath = Path.Combine(albumsPath, "pre-renders");
+            Directory.CreateDirectory(preRendersPath);
         }
 
         public async Task<Album> GetAlbum(string id)
         {
+            // TODO: cache and update if images added while running
             var albumPath = Path.Combine(albumsPath, id);
             var content = await File.ReadAllTextAsync(albumPath + ".json");
             var album = JsonConvert.DeserializeObject<Album>(content);
@@ -57,9 +61,9 @@ namespace ImageGallery.Services
         // TODO: Show full version with metadata
         // TODO: Able to delete  when viewing full version
 
-        public async Task<byte[]> GetPreRenders(string albumId, string imageId)
+        public async Task<byte[]> GetPreRenders(ushort width, ushort height)
         {
-            var filePath = Path.Combine(albumsPath, albumId, "pre-renders", imageId);
+            var filePath = Path.Combine(preRendersPath, width + "x" + height + ".png");
             return await File.ReadAllBytesAsync(filePath);
         }
 
@@ -101,45 +105,37 @@ namespace ImageGallery.Services
             Directory.CreateDirectory(thumbsPath);
             using (var image = new MagickImage(filePath))
             {
-                var thumbPath = Path.Combine(thumbsPath, Path.GetFileName(filePath));
-                var exif = image.GetExifProfile();
-                using (var thumbnail = exif?.CreateThumbnail())
+                const int MaxThubSize = 400;
+                if (image.Width > image.Height)
                 {
-                    if (thumbnail == null)
+                    if (image.Width > MaxThubSize)
                     {
-                        const int MaxThubSize = 400;
-                        if (image.Width > image.Height)
-                        {
-                            if (image.Width > MaxThubSize)
-                            {
-                                image.Resize(MaxThubSize, 0);
-                            }
-                        }
-                        else if (image.Height > MaxThubSize)
-                        {
-                            image.Resize(0, MaxThubSize);
-                        }
-
-                        image.Write(thumbPath);
-                    }
-                    else
-                    {
-                        thumbnail.Write(thumbPath);
+                        image.Resize(MaxThubSize, 0);
                     }
                 }
+                else if (image.Height > MaxThubSize)
+                {
+                    image.Resize(0, MaxThubSize);
+                }
+
+                var thumbPath = Path.Combine(thumbsPath, Path.GetFileName(filePath));
+                image.Write(thumbPath);
 
                 optimizer.OptimalCompression = true;
                 optimizer.Compress(thumbPath);
 
-                var preRendersPath = Path.Combine(albumPath, "pre-renders");
-                Directory.CreateDirectory(preRendersPath);
-                var preRenderPath = Path.Combine(preRendersPath, Path.GetFileName(filePath));
-                // TODO: Find mean color from the image
-                var preRender = new MagickImage(MagickColor.FromRgb(120, 60, 30), image.Width, image.Height);
-                preRender.Write(preRenderPath);
-                optimizer.Compress(preRenderPath);
+                // TODO: path to  utility
+                var preRenderPath = Path.Combine(preRendersPath, image.Width + "x" + image.Height + ".png");
+                if (!File.Exists(preRenderPath))
+                {
+                    // TODO: Find mean color from the image
+                    var preRender = new MagickImage(MagickColor.FromRgb(120, 60, 30), image.Width, image.Height);
+                    preRender.Write(preRenderPath);
+                    optimizer.Compress(preRenderPath);
+                }
 
                 var dateTaken = DateTime.UtcNow;
+                var exif = image.GetExifProfile();
                 var exifDateTime = exif?.GetValue(ExifTag.DateTime);
                 if (exifDateTime != null)
                 {
@@ -149,7 +145,7 @@ namespace ImageGallery.Services
                     }
                 }
 
-                album.AddImage(new Image(imageId, dateTaken));
+                album.AddImage(new Image(imageId, dateTaken, (ushort)image.Width, (ushort)image.Height));
             }
         }
 
