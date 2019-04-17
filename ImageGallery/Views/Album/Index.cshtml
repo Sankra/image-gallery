@@ -15,11 +15,20 @@
     </div>
 </form>
 
-<section id="photos">
+<div class="gallery">
+    @foreach (var image in Model.Images)
+    {
+        <a class="item" href="/ImageView/@Model.Id/@image.Id">
+            <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id">
+        </a>
+    }
+</div>
+
+@*
     @foreach (var image in Model.Images)
     {
         <a href="/ImageView/@Model.Id/@image.Id">
             <img class="lazyload zoom" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id" width="@image.Width" height="@image.Height">
         </a>
     }
-</section>
+*@
