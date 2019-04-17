@@ -12,12 +12,18 @@ namespace ImageGallery.Controllers
     [Route("/")]
     public class HomeController : Controller
     {
+        readonly IAlbumService albumService;
 
-
-        // GET: /<controller>/
-        public IActionResult Index()
+        public HomeController(IAlbumService albumService)
         {
-            return null;
+            this.albumService = albumService;
+        }
+
+        [ResponseCache(NoStore = true)]
+        public async Task<IActionResult> Index()
+        {
+            var albumPreviews = await albumService.GetAlbumPreviews();
+            return View(albumPreviews);
         }
     }
 }

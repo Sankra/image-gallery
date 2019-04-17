@@ -1,1 +1,15 @@
-﻿<h1>Home</h1>
+﻿@model Album[]
+<h1>@Model.Length albums</h1>
+@foreach (var album in Model)
+{
+    <a href="/Album/@album.Id">
+        <h2>@album.Name</h2>
+    </a>
+    @*TODO: reuse in component? Only if same as in album vie*@
+    @foreach (var image in album.Images)
+    {
+        <a href="/ImageView/@album.Id/@image.Id">
+            <img class="lazyload zoom" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@album.Id/@image.Id" width="@image.Width" height="@image.Height">
+        </a>
+    }
+}

@@ -5,6 +5,10 @@ namespace ImageGallery.Models
 {
     public readonly struct Album : IEquatable<Album>
     {
+        static readonly Random random;
+
+        static Album() => random = new Random();
+
         public Album(string id, string name)
         {
             Id = id;
@@ -31,5 +35,20 @@ namespace ImageGallery.Models
         public void OrderByDateTaken() => Images.Sort();
 
         public void Delete(Image image) => Images.Remove(image);
+
+        public void Trim(int number)
+        {
+            int n = Images.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                var value = Images[k];
+                Images[k] = Images[n];
+                Images[n] = value;
+            }
+
+            Images.RemoveRange(0, Images.Count - number);
+        }
     }
 }

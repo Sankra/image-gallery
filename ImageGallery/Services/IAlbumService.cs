@@ -7,6 +7,7 @@ namespace ImageGallery.Services
 {
     public interface IAlbumService
     {
+        Task<Album[]> GetAlbumPreviews();
         Task<Album> GetAlbum(string id);
         Task AddImagesToAlbumWithId(string id, List<IFormFile> files);
         Task Delete(string albumId, string imageId);

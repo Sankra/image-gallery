@@ -31,7 +31,6 @@ namespace ImageGallery.Services
             var albumPath = Path.Combine(albumsPath, id);
             var content = await File.ReadAllTextAsync(albumPath + ".json");
             var album = JsonConvert.DeserializeObject<Album>(content);
-            album.OrderByDateTaken();
             return album;
         }
 
@@ -46,6 +45,7 @@ namespace ImageGallery.Services
                 }
             }
 
+            album.OrderByDateTaken();
             await SaveAlbum(album);
         }
 
@@ -81,6 +81,19 @@ namespace ImageGallery.Services
             var album = await GetAlbum(albumId);
             album.Delete(new Image(imageId));
             await SaveAlbum(album);
+        }
+
+        public async Task<Album[]> GetAlbumPreviews()
+        {
+            var albumFiles = Directory.GetFiles(albumsPath, "*.json");
+            var albumPreviews = new Album[albumFiles.Length];
+            for (int i = 0; i < albumFiles.Length; i++)
+            {
+                albumPreviews[i] = await GetAlbum(Path.GetFileNameWithoutExtension(albumFiles[i]));
+                albumPreviews[i].Trim(5);
+            }
+
+            return albumPreviews;
         }
 
         async Task AddImageToAlbumWithId(Album album, IFormFile file)

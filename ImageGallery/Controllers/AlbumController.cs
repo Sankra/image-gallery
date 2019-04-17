@@ -23,6 +23,7 @@ namespace ImageGallery.Controllers
         }
 
         [HttpGet("{id}")]
+        [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string id)
         {
             // TODO: Show latest from all albums, randomized order
