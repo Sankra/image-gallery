@@ -73,6 +73,16 @@ namespace ImageGallery.Services
             return await File.ReadAllBytesAsync(filePath);
         }
 
+        public async Task Delete(string albumId, string imageId)
+        {
+            // TODO: Add deleted image id to trash album
+            // TODO: Create a trash album to view deleted images
+            // TODO: Delete 4 reelz from trash
+            var album = await GetAlbum(albumId);
+            album.Delete(new Image(imageId));
+            await SaveAlbum(album);
+        }
+
         async Task AddImageToAlbumWithId(Album album, IFormFile file)
         {
             var kindParts = file.ContentType.Split('/');

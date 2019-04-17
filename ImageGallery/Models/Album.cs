@@ -29,5 +29,7 @@ namespace ImageGallery.Models
         }
 
         public void OrderByDateTaken() => Images.Sort();
+
+        public void Delete(Image image) => Images.Remove(image);
     }
 }
