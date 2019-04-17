@@ -129,7 +129,7 @@ namespace ImageGallery.Services
                 if (!File.Exists(preRenderPath))
                 {
                     // TODO: Find mean color from the image
-                    var preRender = new MagickImage(MagickColor.FromRgb(120, 60, 30), image.Width, image.Height);
+                    var preRender = new MagickImage(MagickColor.FromRgba(0, 0, 0, 1), image.Width, image.Height);
                     preRender.Write(preRenderPath);
                     optimizer.Compress(preRenderPath);
                 }
