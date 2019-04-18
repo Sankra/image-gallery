@@ -5,9 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Image Gallery</title>
     <link href="~/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar">
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <a href="/" class="logo">
+            <img src="/logo.png" width="127" height="26" alt="DIPS Photos">
+        </a>
+        <ul class="main-nav" id="js-menu">
+            <li>
+                <a href="#" class="nav-links">Home</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">Products</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">About Us</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">Contact Us</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">Blog</a>
+            </li>
+        </ul>
+    </nav>
     @RenderBody()
     <script src="~/js/lazysizes.min.js" async=""></script>
+    <script>let mainNav = document.getElementById('js-menu');
+        let navBarToggle = document.getElementById('js-navbar-toggle');
+
+        navBarToggle.addEventListener('click', function () {
+            mainNav.classList.toggle('active');
+        });</script>
 </body>
 </html>
