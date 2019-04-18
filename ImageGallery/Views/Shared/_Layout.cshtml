@@ -15,6 +15,9 @@
         <a href="/" class="logo">
             <img src="/logo.png" width="127" height="26" alt="DIPS Photos">
         </a>
+        <span class="navbar-add" id="js-navbar-add">
+            <i class="fas fa-plus"></i>
+        </span>
         <ul class="main-nav" id="js-menu">
             <li>
                 <a href="#" class="nav-links">Home</a>
@@ -37,9 +40,12 @@
     <script src="~/js/lazysizes.min.js" async=""></script>
     <script>let mainNav = document.getElementById('js-menu');
         let navBarToggle = document.getElementById('js-navbar-toggle');
-
         navBarToggle.addEventListener('click', function () {
             mainNav.classList.toggle('active');
+        });
+        let navBarAdd = document.getElementById('js-navbar-add');
+        navBarAdd.addEventListener('click', function () {
+            window.location.href = 'Add';
         });</script>
 </body>
 </html>
