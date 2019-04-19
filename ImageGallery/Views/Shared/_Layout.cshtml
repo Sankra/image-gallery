@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,7 +15,7 @@
             @ViewData["Title"]
         </span>
         <a href="/" class="logo">
-            <img src="/logo.png" width="40" height="40" alt="Logo image">
+            <img src="/@Configuration["Customization:Logo"]" width="40" height="40" alt="Logo image">
         </a>
         @if (ViewData["ShowAdd"] is bool)
         {

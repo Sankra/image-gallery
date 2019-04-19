@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace ImageGallery
 {
@@ -33,6 +34,7 @@ namespace ImageGallery
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             Enum.TryParse(Configuration["BackingStore"], out BackingStore backingStore);
+            // TODO: Change Exception text when another store is added
             switch (backingStore)
             {
                 case BackingStore.File:
@@ -41,6 +43,10 @@ namespace ImageGallery
                 default:
                     throw new ArgumentException("BackingStore must be either file or TODO");
             }
+
+            //var a = Configuration["Customization"];
+            //var customization = JsonConvert.DeserializeObject<Customization>(a);
+            //services.AddSingleton(customization);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
