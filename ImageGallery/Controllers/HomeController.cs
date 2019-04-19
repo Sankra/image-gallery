@@ -21,6 +21,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem
             // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views
+            // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
             this.albumService = albumService;
             this.configuration = configuration;
         }
