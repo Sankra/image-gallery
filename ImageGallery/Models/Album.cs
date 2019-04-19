@@ -38,6 +38,11 @@ namespace ImageGallery.Models
 
         public void Trim(int number)
         {
+            if (Images.Count < number)
+            {
+                return;
+            }
+
             int n = Images.Count;
             while (n > 1)
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ImageGallery.Models;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ namespace ImageGallery.Services
 {
     public interface IAlbumService
     {
+        Task<string> AddAlbum(string name);
         Task<Album[]> GetAlbumPreviews();
         Task<Album> GetAlbum(string id);
         Task AddImagesToAlbumWithId(string id, List<IFormFile> files);

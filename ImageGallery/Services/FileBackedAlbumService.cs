@@ -96,6 +96,19 @@ namespace ImageGallery.Services
             return albumPreviews;
         }
 
+        public async Task<string> AddAlbum(string name)
+        {
+            var albumId = Guid.NewGuid().ToString();
+
+            var newAlbum = new Album(albumId, name);
+            await SaveAlbum(newAlbum);
+
+            var albumPath = Path.Combine(albumsPath, albumId);
+            Directory.CreateDirectory(albumPath);
+
+            return albumId;
+        }
+
         async Task AddImageToAlbumWithId(Album album, IFormFile file)
         {
             var kindParts = file.ContentType.Split('/');

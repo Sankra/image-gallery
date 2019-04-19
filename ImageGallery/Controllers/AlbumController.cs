@@ -29,6 +29,7 @@ namespace ImageGallery.Controllers
             // TODO: Show latest from all albums, randomized order
             var album = await albumService.GetAlbum(id);
             ViewData["Title"] = album.Name;
+            ViewData["ShowAdd"] = true;
             return View(album);
         }
 

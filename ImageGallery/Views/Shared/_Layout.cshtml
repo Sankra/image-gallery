@@ -15,9 +15,13 @@
         <a href="/" class="logo">
             <img src="/logo.png" width="127" height="26" alt="DIPS Photos">
         </a>
-        <span class="navbar-add" id="js-navbar-add">
-            <i class="fas fa-plus"></i>
-        </span>
+        @if (ViewData["ShowAdd"] is bool)
+        {
+            <span class="navbar-add" id="js-navbar-add">
+                <i class="fas fa-plus"></i>
+            </span>
+        }
+
         <span class="navbar-toggle" id="js-navbar-toggle">
             <i class="fas fa-bars"></i>
         </span>

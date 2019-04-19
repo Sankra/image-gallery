@@ -17,6 +17,8 @@ namespace ImageGallery.Controllers
         public HomeController(IAlbumService albumService)
         {
             // TODO: Favicon
+            // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem
+            // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views
             this.albumService = albumService;
         }
 
@@ -24,8 +26,25 @@ namespace ImageGallery.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["Title"] = "DIPS Photos";
+            ViewData["ShowAdd"] = true;
             var albumPreviews = await albumService.GetAlbumPreviews();
             return View(albumPreviews);
+        }
+
+        [HttpGet("Add")]
+        public IActionResult Add()
+        {
+            // TODO: Gjør noe med at tittel er overalt
+            ViewData["Title"] = "Create New Album";
+            return View("Add");
+        }
+
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add(string name)
+        {
+            // TODO: Error handling
+            var albumId = await albumService.AddAlbum(name);
+            return RedirectToAction("Index", "Album", new { id = albumId });
         }
     }
 }
