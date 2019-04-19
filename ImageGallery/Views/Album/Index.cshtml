@@ -1,11 +1,27 @@
 ﻿@model Album
-<div style="padding: 10px">
-    <div class="gallery">
-        @foreach (var image in Model.Images)
-        {
-            <a class="item" href="/ImageView/@Model.Id/@image.Id">
-                <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id">
-            </a>
-        }
+@if (Model.Images.Count == 0)
+{
+    <div class="center" id="add-tutorial">
+        <h2>Press</h2>
+        <i class="fas fa-plus"></i>
+        <h2> to add photos</h2>
     </div>
-</div>
+    <script>let navBarAdd = document.getElementById('add-tutorial');
+        navBarAdd.addEventListener('click', function () {
+            window.location.href += window.location.href.endsWith('/') ? 'Add' : '/Add';
+        });</script>
+}
+else
+{
+    <div style="padding: 10px">
+        <div class="gallery">
+            @foreach (var image in Model.Images)
+            {
+                <a class="item" href="/ImageView/@Model.Id/@image.Id">
+                    <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id">
+                </a>
+            }
+        </div>
+    </div>
+}
+
