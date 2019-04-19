@@ -16,12 +16,14 @@ namespace ImageGallery.Controllers
 
         public HomeController(IAlbumService albumService)
         {
+            // TODO: Favicon
             this.albumService = albumService;
         }
 
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = "DIPS Photos";
             var albumPreviews = await albumService.GetAlbumPreviews();
             return View(albumPreviews);
         }

@@ -3,20 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Image Gallery</title>
+    <title>@ViewData["Title"]</title>
     <link href="~/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
     <nav class="navbar">
-        <span class="navbar-toggle" id="js-navbar-toggle">
-            <i class="fas fa-bars"></i>
+        <span class="navbar-title">
+            @ViewData["Title"]
         </span>
         <a href="/" class="logo">
             <img src="/logo.png" width="127" height="26" alt="DIPS Photos">
         </a>
         <span class="navbar-add" id="js-navbar-add">
             <i class="fas fa-plus"></i>
+        </span>
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
         </span>
         <ul class="main-nav" id="js-menu">
             <li>
