@@ -19,7 +19,6 @@ namespace ImageGallery.Controllers
 
         public HomeController(IAlbumService albumService, IConfiguration configuration)
         {
-            // TODO: Favicon
             // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem
             // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views
             this.albumService = albumService;
