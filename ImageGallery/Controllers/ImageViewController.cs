@@ -21,7 +21,7 @@ namespace ImageGallery.Controllers
         public async Task<IActionResult> Delete(string albumId, string imageId)
         {
             await albumService.Delete(albumId, imageId);
-            return RedirectToAction("Index", "Album", new { id = albumId });
+            return RedirectToAction("Index", "Album", new { albumId });
         }
     }
 }

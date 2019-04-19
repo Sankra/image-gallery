@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ImageGallery.Models;
 using ImageGallery.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ImageGallery.Controllers
 {
@@ -22,23 +16,31 @@ namespace ImageGallery.Controllers
             this.albumService = albumService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{albumId}")]
         [ResponseCache(NoStore = true)]
-        public async Task<IActionResult> Index(string id)
+        public async Task<IActionResult> Index(string albumId)
         {
             // TODO: Show latest from all albums, randomized order
-            var album = await albumService.GetAlbum(id);
+            var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["ShowAdd"] = true;
             return View(album);
         }
 
-        //  TODO: Move upload to own page
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Index(string id, List<IFormFile> files)
+        [HttpGet("{albumId}/Add")]
+        public IActionResult Add()
         {
-            await albumService.AddImagesToAlbumWithId(id, files);
-            return await Index(id);
+            // TODO: Gjør noe med at tittel er overalt
+            ViewData["Title"] = "Upload Photos";
+            return View("Add");
+        }
+
+        [HttpPost("{albumId}/Add")]
+        public async Task<IActionResult> AddFiles(string albumId, List<IFormFile> photos)
+        {
+            // TODO: Errorhandling
+            await albumService.AddImagesToAlbumWithId(albumId, photos);
+            return RedirectToAction("Index", "Album", new { albumId });
         }
     }
 }

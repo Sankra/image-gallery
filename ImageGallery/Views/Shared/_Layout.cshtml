@@ -49,10 +49,14 @@
         let navBarToggle = document.getElementById('js-navbar-toggle');
         navBarToggle.addEventListener('click', function () {
             mainNav.classList.toggle('active');
-        });
-        let navBarAdd = document.getElementById('js-navbar-add');
-        navBarAdd.addEventListener('click', function () {
-            window.location.href = 'Add';
         });</script>
+    @if (ViewData["ShowAdd"] is bool)
+    {
+        <script>let navBarAdd = document.getElementById('js-navbar-add');
+            navBarAdd.addEventListener('click', function () {
+                window.location.href += window.location.href.endsWith('/') ? 'Add' : '/Add';
+            });</script>
+    }
+
 </body>
 </html>

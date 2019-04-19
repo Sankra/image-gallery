@@ -1,21 +1,5 @@
 ﻿@model Album
 <div style="padding: 10px">
-    <h1>@Model.Name</h1>
-
-    <form method="post" enctype="multipart/form-data" asp-controller="Album" asp-action="Index">
-        <div class="form-group">
-            <div class="col-md-10">
-                <p>Upload one or more files using this form:</p>
-                <input type="file" name="files" multiple>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Upload">
-            </div>
-        </div>
-    </form>
-
     <div class="gallery">
         @foreach (var image in Model.Images)
         {

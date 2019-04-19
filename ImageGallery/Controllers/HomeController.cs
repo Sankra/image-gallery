@@ -44,7 +44,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Error handling
             var albumId = await albumService.AddAlbum(name);
-            return RedirectToAction("Index", "Album", new { id = albumId });
+            return RedirectToAction("Index", "Album", new { albumId });
         }
     }
 }
