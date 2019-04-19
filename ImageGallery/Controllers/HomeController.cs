@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ImageGallery.Configuration;
+﻿using System.Threading.Tasks;
 using ImageGallery.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ImageGallery.Controllers
 {
@@ -19,9 +13,11 @@ namespace ImageGallery.Controllers
 
         public HomeController(IAlbumService albumService, IConfiguration configuration)
         {
+            // TODO: Configurerbar farge på menyen
+            // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
             // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem
             // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views
-            // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
+
             this.albumService = albumService;
             this.configuration = configuration;
         }
@@ -29,6 +25,7 @@ namespace ImageGallery.Controllers
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index()
         {
+            // TODO: configurable values should not be strings...
             ViewData["Title"] = configuration["Customization:SiteName"];
             ViewData["ShowAdd"] = true;
             var albumPreviews = await albumService.GetAlbumPreviews();

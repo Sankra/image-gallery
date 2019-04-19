@@ -43,6 +43,7 @@ namespace ImageGallery.Models
                 return;
             }
 
+            // TODO: Don't shuffle, just return n random photos and return them
             int n = Images.Count;
             while (n > 1)
             {

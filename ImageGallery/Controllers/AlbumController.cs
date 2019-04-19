@@ -20,7 +20,6 @@ namespace ImageGallery.Controllers
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string albumId)
         {
-            // TODO: Show latest from all albums, randomized order
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
@@ -31,7 +30,8 @@ namespace ImageGallery.Controllers
         [HttpGet("{albumId}/Add")]
         public async Task<IActionResult> Add(string albumId)
         {
-            // TODO: Gjør noe med at tittel er overalt
+            // TODO: Gjør noe med at ViewData tittel er overalt
+            // TODO: Gjør det mulig å laste opp mange flere  bilder enn er mulig i dag
             var album = await albumService.GetAlbumMetadata(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
