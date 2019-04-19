@@ -28,7 +28,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <span class="navbar-title">
+        <span class="navbar-title" id="js-navbar-title">
             @ViewData["Title"]
         </span>
         <a href="/" class="logo">
@@ -74,6 +74,15 @@
         <script>let navBarAdd = document.getElementById('js-navbar-add');
             navBarAdd.addEventListener('click', function () {
                 window.location.href += window.location.href.endsWith('/') ? 'Add' : '/Add';
+            });</script>
+    }
+    @if (ViewData["AlbumId"] is string albumId)
+    {
+        <script>
+            let navBarTitle = document.getElementById('js-navbar-title');
+            navBarTitle.style.cursor = 'pointer';
+            navBarTitle.addEventListener('click', function () {
+                window.location.href = '/Album/@albumId';
             });</script>
     }
 

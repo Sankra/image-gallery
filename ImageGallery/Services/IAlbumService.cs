@@ -11,6 +11,7 @@ namespace ImageGallery.Services
         Task<string> AddAlbum(string name);
         Task<Album[]> GetAlbumPreviews();
         Task<Album> GetAlbum(string id);
+        Task<Album> GetAlbumMetadata(string id);
         Task AddImagesToAlbumWithId(string id, List<IFormFile> files);
         Task Delete(string albumId, string imageId);
         Task<byte[]> GetThumbnail(string albumId, string imageId);

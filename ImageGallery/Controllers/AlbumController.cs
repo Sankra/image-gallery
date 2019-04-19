@@ -23,15 +23,18 @@ namespace ImageGallery.Controllers
             // TODO: Show latest from all albums, randomized order
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
+            ViewData["AlbumId"] = albumId;
             ViewData["ShowAdd"] = true;
             return View(album);
         }
 
         [HttpGet("{albumId}/Add")]
-        public IActionResult Add()
+        public async Task<IActionResult> Add(string albumId)
         {
             // TODO: Gjør noe med at tittel er overalt
-            ViewData["Title"] = "Upload Photos";
+            var album = await albumService.GetAlbumMetadata(albumId);
+            ViewData["Title"] = album.Name;
+            ViewData["AlbumId"] = albumId;
             return View("Add");
         }
 

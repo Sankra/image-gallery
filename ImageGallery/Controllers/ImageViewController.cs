@@ -14,8 +14,14 @@ namespace ImageGallery.Controllers
             this.albumService = albumService;
 
         [HttpGet("{albumId}/{imageId}")]
-        public IActionResult Index(string albumId, string imageId) =>
-            View(new FullScreenImage(albumId, imageId));
+        public async Task<IActionResult> Index(string albumId, string imageId)
+        {
+            var album = await albumService.GetAlbum(albumId);
+            ViewData["Title"] = album.Name;
+            ViewData["AlbumId"] = albumId;
+            return View(new FullScreenImage(albumId, imageId));
+        }
+
 
         [HttpPost("{albumId}/{imageId}")]
         public async Task<IActionResult> Delete(string albumId, string imageId)

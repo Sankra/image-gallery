@@ -34,6 +34,15 @@ namespace ImageGallery.Services
             return album;
         }
 
+        public async Task<Album> GetAlbumMetadata(string id)
+        {
+            // TODO: Don't add images here
+            var albumPath = Path.Combine(albumsPath, id);
+            var content = await File.ReadAllTextAsync(albumPath + ".json");
+            var album = JsonConvert.DeserializeObject<Album>(content);
+            return album;
+        }
+
         public async Task AddImagesToAlbumWithId(string albumId, List<IFormFile> files)
         {
             var album = await GetAlbum(albumId);
