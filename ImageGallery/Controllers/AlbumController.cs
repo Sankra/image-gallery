@@ -23,7 +23,7 @@ namespace ImageGallery.Controllers
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
-            ViewData["ShowAdd"] = true;
+            ViewData["AddUrl"] = $"/Album/{albumId}/Add";
             return View(album);
         }
 

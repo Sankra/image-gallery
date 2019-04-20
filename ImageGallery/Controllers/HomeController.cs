@@ -15,7 +15,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Configurerbar farge på menyen
             // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
-            // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem
+            // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem, bare 1 <script>
             // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views
 
             this.albumService = albumService;
@@ -27,7 +27,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: configurable values should not be strings...
             ViewData["Title"] = configuration["Customization:SiteName"];
-            ViewData["ShowAdd"] = true;
+            ViewData["AddUrl"] = $"/Add";
             var albumPreviews = await albumService.GetAlbumPreviews();
             return View(albumPreviews);
         }

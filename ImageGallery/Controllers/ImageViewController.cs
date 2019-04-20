@@ -19,15 +19,17 @@ namespace ImageGallery.Controllers
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
+            ViewData["ShowDelete"] = true;
+            ViewData["AddUrl"] = $"/Album/{albumId}/Add";
             return View(new FullScreenImage(albumId, imageId));
         }
 
 
-        [HttpPost("{albumId}/{imageId}")]
+        [HttpDelete("{albumId}/{imageId}")]
         public async Task<IActionResult> Delete(string albumId, string imageId)
         {
             await albumService.Delete(albumId, imageId);
-            return RedirectToAction("Index", "Album", new { albumId });
+            return NoContent();
         }
     }
 }

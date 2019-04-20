@@ -34,10 +34,16 @@
         <a href="/" class="logo">
             <img src="/@Configuration["Customization:Logo"]" width="40" height="40" alt="Logo image">
         </a>
-        @if (ViewData["ShowAdd"] is bool)
+        @if (ViewData["AddUrl"] is string)
         {
             <span class="navbar-add" id="js-navbar-add">
                 <i class="fas fa-plus"></i>
+            </span>
+        }
+        @if (ViewData["ShowDelete"] is bool)
+        {
+            <span class="navbar-delete" id="js-navbar-delete">
+                <i class="fas fa-trash-alt"></i>
             </span>
         }
 
@@ -69,12 +75,13 @@
         navBarToggle.addEventListener('click', function () {
             mainNav.classList.toggle('active');
         });</script>
-    @if (ViewData["ShowAdd"] is bool)
+    @if (ViewData["AddUrl"] is string)
     {
-        <script>let navBarAdd = document.getElementById('js-navbar-add');
-            navBarAdd.addEventListener('click', function () {
-                window.location.href += window.location.href.endsWith('/') ? 'Add' : '/Add';
-            });</script>
+        <script>
+        let navBarAdd = document.getElementById('js-navbar-add');
+        navBarAdd.addEventListener('click', function () {
+            window.location.href = '@ViewData["AddUrl"]';
+        });</script>
     }
     @if (ViewData["AlbumId"] is string albumId)
     {
@@ -84,7 +91,20 @@
             navBarTitle.addEventListener('click', function () {
                 window.location.href = '/Album/@albumId';
             });</script>
-    }
+        @if (ViewData["ShowDelete"] is bool)
+        {
+            <script>
+            let navBarDelete = document.getElementById('js-navbar-delete');
+            navBarDelete.addEventListener('click', function () {
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function (e) {
+                    window.location.href = '/Album/@ViewData["AlbumId"]';
+                }
+                xhr.open('DELETE', window.location.href, true);
+                xhr.send(null);
 
+            });</script>
+        }
+    }
 </body>
 </html>
