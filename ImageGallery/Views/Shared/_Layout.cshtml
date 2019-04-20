@@ -47,34 +47,26 @@
             </span>
         }
 
-        <span class="navbar-toggle" id="js-navbar-toggle">
+        <span onclick="openNav()" class="navbar-toggle">
             <i class="fas fa-bars"></i>
         </span>
-        <ul class="main-nav" id="js-menu">
-            <li>
-                <a href="#" class="nav-links">Home</a>
-            </li>
-            <li>
-                <a href="#" class="nav-links">Products</a>
-            </li>
-            <li>
-                <a href="#" class="nav-links">About Us</a>
-            </li>
-            <li>
-                <a href="#" class="nav-links">Contact Us</a>
-            </li>
-            <li>
-                <a href="#" class="nav-links">Blog</a>
-            </li>
-        </ul>
+        <div id="mySidenav" class="sidenav">
+            <i class="fa fa-times closebtn" onclick="closeNav()"></i>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
+        </div>
     </nav>
     @RenderBody()
     <script src="~/js/lazysizes.min.js" async=""></script>
-    <script>let mainNav = document.getElementById('js-menu');
-        let navBarToggle = document.getElementById('js-navbar-toggle');
-        navBarToggle.addEventListener('click', function () {
-            mainNav.classList.toggle('active');
-        });</script>
+    <script>function openNav() {
+            document.getElementById('mySidenav').style.width = '250px';
+        }
+
+        function closeNav() {
+            document.getElementById('mySidenav').style.width = '0';
+        }</script>
     @if (ViewData["AddUrl"] is string)
     {
         <script>
