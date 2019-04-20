@@ -27,7 +27,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: configurable values should not be strings...
             ViewData["Title"] = configuration["Customization:SiteName"];
-            ViewData["AddUrl"] = $"/Add";
+            ViewData["AddUrl"] = "/Add";
             var albumPreviews = await albumService.GetAlbumPreviews();
             return View(albumPreviews);
         }

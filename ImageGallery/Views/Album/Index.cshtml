@@ -6,14 +6,15 @@
         <i class="fas fa-plus"></i>
         <h2>to add photos</h2>
     </div>
-    <script>let navBarAdd = document.getElementById('add-tutorial');
-        navBarAdd.addEventListener('click', function () {
-            window.location.href += window.location.href.endsWith('/') ? 'Add' : '/Add';
+    <script>
+        let tutorialAdd = document.getElementById('add-tutorial');
+        tutorialAdd.addEventListener('click', function () {
+            window.location.href = '@ViewData["AddUrl"]';
         });</script>
 }
 else
 {
-    <div style="padding: 10px">
+    <div style="        padding: 10px">
         <div class="gallery">
             @foreach (var image in Model.Images)
             {
