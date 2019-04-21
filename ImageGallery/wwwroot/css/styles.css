@@ -27,6 +27,9 @@
     font-size: 24px;
     background-color: #111111;
     height: 45px;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .logo {
@@ -135,4 +138,8 @@ body {
         .sidenav a {
             font-size: 18px;
         }
+}
+
+.main {
+    margin-top: 45px;
 }
