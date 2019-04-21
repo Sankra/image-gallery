@@ -10,6 +10,7 @@ namespace ImageGallery.Services
     {
         Task<string> AddAlbum(string name);
         Task<Album[]> GetAlbumPreviews();
+        Task<Album[]> GetAlbumsWithoutImages();
         Task<Album> GetAlbum(string id);
         Task<Album> GetAlbumMetadata(string id);
         Task AddImagesToAlbumWithId(string id, List<IFormFile> files);

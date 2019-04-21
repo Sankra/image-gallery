@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace ImageGallery.Controllers
 {
     [Route("/[controller]")]
-    public class ImageController : Controller
+    [ApiController]
+    public class ImageController : ControllerBase
     {
         readonly IAlbumService albumService;
 

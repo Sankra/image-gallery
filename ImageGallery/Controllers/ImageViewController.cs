@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace ImageGallery.Controllers
 {
     [Route("/[controller]")]
-    public class ImageViewController : Controller
+    public class ImageViewController : NavigableController
     {
         readonly IAlbumService albumService;
 
-        public ImageViewController(IAlbumService albumService) =>
+        public ImageViewController(IAlbumService albumService) : base(albumService) =>
             this.albumService = albumService;
 
         [HttpGet("{albumId}/{imageId}")]
+        [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string albumId, string imageId)
         {
+            await SetMenuItems();
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;

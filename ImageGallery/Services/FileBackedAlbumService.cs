@@ -94,15 +94,25 @@ namespace ImageGallery.Services
 
         public async Task<Album[]> GetAlbumPreviews()
         {
-            var albumFiles = Directory.GetFiles(albumsPath, "*.json");
-            var albumPreviews = new Album[albumFiles.Length];
-            for (int i = 0; i < albumFiles.Length; i++)
+            var albumPreviews = await GetAlbumsWithoutImages();
+            foreach (var album in albumPreviews)
             {
-                albumPreviews[i] = await GetAlbum(Path.GetFileNameWithoutExtension(albumFiles[i]));
-                albumPreviews[i].Trim(5);
+                album.Trim(5);
             }
 
             return albumPreviews;
+        }
+
+        public async Task<Album[]> GetAlbumsWithoutImages()
+        {
+            var albumFiles = Directory.GetFiles(albumsPath, "*.json");
+            var albums = new Album[albumFiles.Length];
+            for (int i = 0; i < albumFiles.Length; i++)
+            {
+                albums[i] = await GetAlbum(Path.GetFileNameWithoutExtension(albumFiles[i]));
+            }
+
+            return albums;
         }
 
         public async Task<string> AddAlbum(string name)

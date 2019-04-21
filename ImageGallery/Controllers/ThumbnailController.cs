@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace ImageGallery.Controllers
 {
     [Route("/[controller]")]
-    public class ThumbnailController : Controller
+    [ApiController]
+    public class ThumbnailController : ControllerBase
     {
         readonly IAlbumService albumService;
 

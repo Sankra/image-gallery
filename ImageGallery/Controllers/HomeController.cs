@@ -6,12 +6,12 @@ using Microsoft.Extensions.Configuration;
 namespace ImageGallery.Controllers
 {
     [Route("/")]
-    public class HomeController : Controller
+    public class HomeController : NavigableController
     {
         readonly IAlbumService albumService;
         readonly IConfiguration configuration;
 
-        public HomeController(IAlbumService albumService, IConfiguration configuration)
+        public HomeController(IAlbumService albumService, IConfiguration configuration) : base(albumService)
         {
             // TODO: Configurerbar farge på menyen
             // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
@@ -25,6 +25,7 @@ namespace ImageGallery.Controllers
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index()
         {
+            await SetMenuItems();
             // TODO: configurable values should not be strings...
             ViewData["Title"] = configuration["Customization:SiteName"];
             ViewData["AddUrl"] = "/Add";
@@ -33,8 +34,9 @@ namespace ImageGallery.Controllers
         }
 
         [HttpGet("Add")]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
+            await SetMenuItems();
             // TODO: Gjør noe med at tittel er overalt
             ViewData["Title"] = "Create New Album";
             return View("Add");
@@ -45,6 +47,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Error handling
             var albumId = await albumService.AddAlbum(name);
+            // TODO: Change to JS
             return RedirectToAction("Index", "Album", new { albumId });
         }
     }

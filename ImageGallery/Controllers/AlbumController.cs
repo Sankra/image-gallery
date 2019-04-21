@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace ImageGallery.Controllers
 {
     [Route("/[controller]")]
-    public class AlbumController : Controller
+    public class AlbumController : NavigableController
     {
         readonly IAlbumService albumService;
 
-        public AlbumController(IAlbumService albumService)
+        public AlbumController(IAlbumService albumService) : base(albumService)
         {
             this.albumService = albumService;
         }
@@ -20,6 +20,7 @@ namespace ImageGallery.Controllers
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string albumId)
         {
+            await SetMenuItems();
             var album = await albumService.GetAlbum(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
@@ -32,6 +33,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Gjør noe med at ViewData tittel er overalt
             // TODO: Gjør det mulig å laste opp mange flere  bilder enn er mulig i dag
+            await SetMenuItems();
             var album = await albumService.GetAlbumMetadata(albumId);
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
@@ -43,6 +45,7 @@ namespace ImageGallery.Controllers
         {
             // TODO: Errorhandling
             await albumService.AddImagesToAlbumWithId(albumId, photos);
+            //  TODO: implement in js
             return RedirectToAction("Index", "Album", new { albumId });
         }
     }
