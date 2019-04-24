@@ -25,7 +25,7 @@
 .navbar {
     color: white;
     font-size: 24px;
-    background-color: #111111;
+    background-color: tomato;
     height: 45px;
 }
 
@@ -98,7 +98,7 @@ a {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #111; /* Black*/
+    background-color: tomato;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
