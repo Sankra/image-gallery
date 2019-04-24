@@ -3,11 +3,9 @@ using ImageGallery.Models;
 using ImageGallery.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ImageGallery.Controllers
-{
+namespace ImageGallery.Controllers {
     [Route("/[controller]")]
-    public class ImageViewController : NavigableController
-    {
+    public class ImageViewController : NavigableController {
         readonly IAlbumService albumService;
 
         public ImageViewController(IAlbumService albumService) : base(albumService) =>
@@ -15,11 +13,10 @@ namespace ImageGallery.Controllers
 
         [HttpGet("{albumId}/{imageId}")]
         [ResponseCache(NoStore = true)]
-        public async Task<IActionResult> Index(string albumId, string imageId)
-        {
+        public async Task<IActionResult> Index(string albumId, string imageId) {
             await SetMenuItems();
-            var album = await albumService.GetAlbum(albumId);
-            ViewData["Title"] = album.Name;
+            var image = await albumService.GetImageWithMetadata(albumId, imageId);
+            ViewData["Title"] = image.DateTaken;
             ViewData["AlbumId"] = albumId;
             ViewData["ShowDelete"] = true;
             ViewData["AddUrl"] = $"/Album/{albumId}/Add";
@@ -28,8 +25,7 @@ namespace ImageGallery.Controllers
 
 
         [HttpDelete("{albumId}/{imageId}")]
-        public async Task<IActionResult> Delete(string albumId, string imageId)
-        {
+        public async Task<IActionResult> Delete(string albumId, string imageId) {
             await albumService.Delete(albumId, imageId);
             return NoContent();
         }

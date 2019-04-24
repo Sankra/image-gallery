@@ -19,7 +19,7 @@ else
             @foreach (var image in Model.Images)
             {
                 <a class="item" href="/ImageView/@Model.Id/@image.Id">
-                    <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id">
+                    <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id" title="@image.DateTaken">
                 </a>
             }
         </div>

@@ -28,7 +28,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <span class="navbar-title" id="js-navbar-title">
+        <span class="navbar-title">
             @ViewData["Title"]
         </span>
         <a href="/" class="logo" title="Home">
@@ -86,13 +86,6 @@
     }
     @if (ViewData["AlbumId"] is string albumId)
     {
-        <script>
-            let navBarTitle = document.getElementById('js-navbar-title');
-            navBarTitle.style.cursor = 'pointer';
-            navBarTitle.title = 'Go to album'
-            navBarTitle.addEventListener('click', function () {
-                window.location.href = '/Album/@albumId';
-            });</script>
         @if (ViewData["ShowDelete"] is bool)
         {
             <script>

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ImageGallery.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace ImageGallery.Services
-{
-    public interface IAlbumService
-    {
+namespace ImageGallery.Services {
+    public interface IAlbumService {
         Task<string> AddAlbum(string name);
         Task<Album[]> GetAlbumPreviews();
         Task<Album[]> GetAlbumsWithoutImages();
@@ -18,5 +15,6 @@ namespace ImageGallery.Services
         Task<byte[]> GetThumbnail(string albumId, string imageId);
         Task<byte[]> GetPreRenders(ushort width, ushort height);
         Task<byte[]> GetImage(string albumId, string imageId);
+        Task<Image> GetImageWithMetadata(string albumId, string imageId);
     }
 }
