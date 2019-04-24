@@ -11,6 +11,8 @@ namespace ImageGallery.Controllers {
         public ImageViewController(IAlbumService albumService) : base(albumService) =>
             this.albumService = albumService;
 
+        // TODO: Support next / previous image on swipe
+
         [HttpGet("{albumId}/{imageId}")]
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string albumId, string imageId) {
