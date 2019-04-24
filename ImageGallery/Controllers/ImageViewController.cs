@@ -14,7 +14,6 @@ namespace ImageGallery.Controllers {
         // TODO: Support next / previous image on swipe
 
         [HttpGet("{albumId}/{imageId}")]
-        [ResponseCache(NoStore = true)]
         public async Task<IActionResult> Index(string albumId, string imageId) {
             await SetMenuItems();
             var image = await albumService.GetImageWithMetadata(albumId, imageId);
@@ -24,7 +23,6 @@ namespace ImageGallery.Controllers {
             ViewData["AddUrl"] = $"/Album/{albumId}/Add";
             return View(new FullScreenImage(albumId, imageId));
         }
-
 
         [HttpDelete("{albumId}/{imageId}")]
         public async Task<IActionResult> Delete(string albumId, string imageId) {

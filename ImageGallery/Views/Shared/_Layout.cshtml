@@ -39,6 +39,11 @@
             <span class="navbar-add" id="js-navbar-add" title="Add">
                 <i class="fas fa-plus"></i>
             </span>
+            @if (ViewData["ShowRandom"] is bool) {
+                <span class="navbar-delete" id="js-navbar-random" title="Random photo">
+                    <i class="fas fa-dice"></i>
+                </span>
+            }
         }
         @if (ViewData["ShowDelete"] is bool)
         {
@@ -100,6 +105,14 @@
 
             });</script>
         }
+
+         @if (ViewData["ShowRandom"] is bool) {
+            <script>
+            let navBarRandom = document.getElementById('js-navbar-random');
+            navBarRandom.addEventListener('click', function () {
+                window.location.href = '/Image/@ViewData["AlbumId"]/Random';
+            });</script>
+         }
     }
 </body>
 </html>

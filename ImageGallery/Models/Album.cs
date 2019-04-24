@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ImageGallery.Models
-{
-    public readonly struct Album : IEquatable<Album>
-    {
+namespace ImageGallery.Models {
+    public readonly struct Album : IEquatable<Album> {
         static readonly Random random;
 
         static Album() => random = new Random();
 
-        public Album(string id, string name)
-        {
+        public Album(string id, string name) {
             Id = id;
             Name = name;
             Images = new List<Image>();
@@ -26,8 +23,7 @@ namespace ImageGallery.Models
 
         public override bool Equals(object obj) => obj is Album other && Equals(other);
 
-        public void AddImage(Image image)
-        {
+        public void AddImage(Image image) {
             Images.Add(image);
             Images.Sort();
         }
@@ -36,17 +32,14 @@ namespace ImageGallery.Models
 
         public void Delete(Image image) => Images.Remove(image);
 
-        public void Trim(int number)
-        {
-            if (Images.Count < number)
-            {
+        public void Trim(int number) {
+            if (Images.Count < number) {
                 return;
             }
 
             // TODO: Don't shuffle, just return n random photos and return them
             int n = Images.Count;
-            while (n > 1)
-            {
+            while (n > 1) {
                 n--;
                 int k = random.Next(n + 1);
                 var value = Images[k];
@@ -55,6 +48,11 @@ namespace ImageGallery.Models
             }
 
             Images.RemoveRange(0, Images.Count - number);
+        }
+
+        public Image GetRandomImage() {
+            var i = random.Next(Images.Count);
+            return Images[i];
         }
     }
 }
