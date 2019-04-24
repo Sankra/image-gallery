@@ -10,7 +10,6 @@ namespace ImageGallery.Controllers {
         readonly IConfiguration configuration;
 
         public HomeController(IAlbumService albumService, IConfiguration configuration) : base(albumService) {
-            // TODO: Configurerbar farge på menyen
             // TODO: Linkene på knappene skal ikke være JS, men vanlige lenker
             // TODO: Gråe ut alle klikkbare menypunkter når  musen er over dem, bare 1 <script>
             // TODO: Gjør noe smartere med paddingen jeg slenger rundt med i alle views

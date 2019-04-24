@@ -1,4 +1,4 @@
-﻿.gallery {
+.gallery {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -25,7 +25,7 @@
 .navbar {
     color: white;
     font-size: 24px;
-    background-color: tomato;
+    background-color: #4E8447;
     height: 45px;
 }
 
@@ -98,7 +98,7 @@ a {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: tomato;
+    background-color: #4E8447;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
