@@ -31,23 +31,23 @@
         <span class="navbar-title" id="js-navbar-title">
             @ViewData["Title"]
         </span>
-        <a href="/" class="logo">
+        <a href="/" class="logo" title="Home">
             <img src="/@Configuration["Customization:Logo"]" width="40" height="40" alt="Logo image">
         </a>
         @if (ViewData["AddUrl"] is string)
         {
-            <span class="navbar-add" id="js-navbar-add">
+            <span class="navbar-add" id="js-navbar-add" title="Add">
                 <i class="fas fa-plus"></i>
             </span>
         }
         @if (ViewData["ShowDelete"] is bool)
         {
-            <span class="navbar-delete" id="js-navbar-delete">
+            <span class="navbar-delete" id="js-navbar-delete" title="Delete">
                 <i class="fas fa-trash-alt"></i>
             </span>
         }
 
-        <span onclick="openNav()" class="navbar-toggle">
+        <span onclick="openNav()" class="navbar-toggle" title="Menu">
             <i class="fas fa-bars"></i>
         </span>
         <div id="mySidenav" class="sidenav">
@@ -89,6 +89,7 @@
         <script>
             let navBarTitle = document.getElementById('js-navbar-title');
             navBarTitle.style.cursor = 'pointer';
+            navBarTitle.title = 'Go to album'
             navBarTitle.addEventListener('click', function () {
                 window.location.href = '/Album/@albumId';
             });</script>
