@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ImageGallery.Models;
 using ImageMagick;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -14,8 +15,8 @@ namespace ImageGallery.Services {
         readonly string albumsPath;
         readonly string preRendersPath;
 
-        public FileBackedAlbumService() {
-            var currentFolder = Directory.GetCurrentDirectory();
+        public FileBackedAlbumService(IHostingEnvironment hostingEnvironment) {
+            var currentFolder = hostingEnvironment.ContentRootPath;
             albumsPath = Path.Combine(currentFolder, "albums");
             Directory.CreateDirectory(albumsPath);
             preRendersPath = Path.Combine(albumsPath, "pre-renders");
