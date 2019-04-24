@@ -86,6 +86,10 @@ body {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */

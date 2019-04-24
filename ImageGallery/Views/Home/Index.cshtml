@@ -15,18 +15,24 @@
 else
 {
     <div style="        padding: 10px">
-        <h1>@Model.Length albums</h1>
         @foreach (var album in Model)
         {
             <a href="/Album/@album.Id">
                 <h2>@album.Name</h2>
             </a>
             @*TODO: reuse in component? Only if same as in album vie*@
-            @foreach (var image in album.Images)
+            @if (album.Images.Count == 0)
             {
-                <a href="/ImageView/@album.Id/@image.Id">
-                    <img class="lazyload zoom" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@album.Id/@image.Id" width="@image.Width" height="@image.Height">
-                </a>
+                <a href="/Album/@album.Id/Add"><h3>Press <i class="fas fa-plus"></i> to add photos</h3></a>
+            }
+            else
+            {
+                @foreach (var image in album.Images)
+                {
+                    <a href="/ImageView/@album.Id/@image.Id">
+                        <img class="lazyload zoom" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@album.Id/@image.Id" width="@image.Width" height="@image.Height">
+                    </a>
+                }
             }
         }
     </div>
