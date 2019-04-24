@@ -1,7 +1,7 @@
 ﻿<div style="padding: 10px">
     <h2>Enter album name</h2>
     <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Add">
-        <input type="text" name="name" placeholder="Album name" />
-        <input type="submit" value="Create New Album">
+        <input type="text" id="text-input" onkeyup="enableSubmit()" name="name" placeholder="Album name" />
+        <input type="submit" id="submit" value="Create New Album" disabled>
     </form>
 </div>

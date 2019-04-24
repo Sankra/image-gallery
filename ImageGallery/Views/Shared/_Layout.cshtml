@@ -66,7 +66,16 @@
 
         function closeNav() {
             document.getElementById('mySidenav').style.width = '0';
-        }</script>
+        }
+
+        function enableSubmit() {
+            if(document.getElementById('text-input').value==='') { 
+            document.getElementById('submit').disabled = true; 
+        } else { 
+            document.getElementById('submit').disabled = false;
+        }
+    }
+        </script>
     @if (ViewData["AddUrl"] is string)
     {
         <script>
