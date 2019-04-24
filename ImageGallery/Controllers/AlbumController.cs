@@ -21,7 +21,10 @@ namespace ImageGallery.Controllers {
             ViewData["Title"] = album.Name;
             ViewData["AlbumId"] = albumId;
             ViewData["AddUrl"] = $"/Album/{albumId}/Add";
-            ViewData["ShowRandom"] = true;
+            if (album.Images.Count > 0) {
+                ViewData["ShowRandom"] = true;
+            }
+
             return View(album);
         }
 
