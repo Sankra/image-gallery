@@ -67,7 +67,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .center-fit {
@@ -147,7 +147,7 @@ a {
     grid-template-columns: repeat(5, 18.8vw);
     grid-template-rows: 18.8vw;
     grid-gap: 1vw;
-    padding: 1vw;
+    padding-right: 1vw;
 }
 
 .square {
@@ -158,4 +158,9 @@ a {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.body {
+    margin-left: 1vw;
+    margin-bottom: 1vw;
 }
