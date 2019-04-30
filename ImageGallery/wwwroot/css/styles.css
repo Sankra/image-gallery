@@ -141,3 +141,21 @@ a {
             font-size: 18px;
         }
 }
+
+.gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(5, 18.8vw);
+    grid-template-rows: 18.8vw;
+    grid-gap: 1vw;
+    padding: 1vw;
+}
+
+.square {
+    background-color: #4E8447;
+}
+
+.photo > a > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
