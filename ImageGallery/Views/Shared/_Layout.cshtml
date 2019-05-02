@@ -31,17 +31,14 @@
 </head>
 <body>
     <nav class="navbar">
-        <span class="navbar-title">
-            @Configuration["Customization:SiteName"]
-        </span>
+        <a href="/" class="navbar-title" title="@Configuration["Customization:SiteName"]">
+            <span>@Configuration["Customization:SiteName"]</span>
+        </a>
         <a href="/" class="logo" title="Home">
             <img src="/@Configuration["Customization:Logo"]" width="40" height="40" alt="Logo image">
         </a>
         @if (ViewData["AddUrl"] is string)
         {
-            <span class="navbar-add" id="js-navbar-add" title="Add">
-                <i class="fas fa-plus"></i>
-            </span>
             @if (ViewData["ShowRandom"] is bool) {
                 <span class="navbar-delete" id="js-navbar-random" title="Random photo">
                     <i class="fas fa-dice"></i>

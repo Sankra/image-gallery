@@ -32,21 +32,20 @@
 .logo {
     position: absolute;
     top: 2px;
-    left: 20px;
+    left: 1vw;
 }
 
 .navbar-toggle {
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 1vw;
     cursor: pointer;
 }
 
 .navbar-add {
-    position: absolute;
-    top: 10px;
-    right: 54px;
+    float: right;
     cursor: pointer;
+    color: Red;
 }
 
 .navbar-delete {
@@ -57,6 +56,7 @@
 }
 
 .navbar-title {
+    color: white;
     position: absolute;
     top: 10px;
     left: 50%;
@@ -162,5 +162,6 @@ a {
 
 .body {
     margin-left: 1vw;
+    margin-right: 1vw;
     margin-bottom: 1vw;
 }

@@ -41,13 +41,9 @@ namespace ImageGallery {
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            var cssPath = Path.Combine(env.WebRootPath, "css", "styles.css");
-            var cssLines = File.ReadAllLines(cssPath);
-            for (int i = 0; i < cssLines.Length; i++) {
-                if (cssLines[i].StartsWith("    background-color: ", StringComparison.InvariantCulture)) {
-                    cssLines[i] = "    background-color: " + Configuration["MenuColor"] + ";";
-                }
-            }
+            string cssPath;
+            string[] cssLines;
+            UpdateCssFromConfiguration(env, out cssPath, out cssLines);
 
             File.WriteAllLines(cssPath, cssLines);
 
@@ -71,6 +67,18 @@ namespace ImageGallery {
 
             app.UseStaticFiles();
             app.UseMvc();
+        }
+
+        void UpdateCssFromConfiguration(IHostingEnvironment env, out string cssPath, out string[] cssLines) {
+            cssPath = Path.Combine(env.WebRootPath, "css", "styles.css");
+            cssLines = File.ReadAllLines(cssPath);
+            for (int i = 0; i < cssLines.Length; i++) {
+                if (cssLines[i].StartsWith("    background-color: ", StringComparison.InvariantCulture)) {
+                    cssLines[i] = "    background-color: " + Configuration["MenuColor"] + ";";
+                }
+            }
+
+            // TODO: PrimaryColor
         }
     }
 }

@@ -1,5 +1,10 @@
 ﻿@model Album[]
-<h1>Albums</h1>
+<h1>
+    Albums
+    <span class="navbar-add" id="js-navbar-add" title="Add new album">
+        <i class="fas fa-plus-square"></i>
+    </span>
+</h1>
 @if (Model.Length == 0)
 {
     <div class="center" id="add-album-tutorial">
