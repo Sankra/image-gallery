@@ -1,15 +1,16 @@
 ﻿@model Album[]
-<h1>
-    Albums
-    <span class="navbar-add" id="js-navbar-add" title="Add new album">
+<div class="header">
+    <h1 class="center-cell">Albums</h1>  
+    <span></span>
+    <span class="image-button center-cell" id="js-add" title="Add new album">
         <i class="fas fa-plus-square"></i>
     </span>
-</h1>
+</div>
 @if (Model.Length == 0)
 {
     <div class="center" id="add-album-tutorial">
         <h2>Press</h2>
-        <i class="fas fa-plus"></i>
+        <span class="image-button"><i class="fas fa-plus-square"></i></span>
         <h2>to add albums</h2>
     </div>
     <script>
@@ -20,15 +21,20 @@
 }
 else
 {
-    @foreach (var album in Model)
+    @for (int i = 0; i < Model.Length; i++) 
     {
+        var album = Model[i];
         <a href="/Album/@album.Id">
+        @if (i == 0) {
+            <h2 class="top-header">@album.Name</h2>
+        } else {
             <h2>@album.Name</h2>
+        }
         </a>
         @*TODO: reuse in component? Only if same as in album vie*@
         @if (album.Images.Count == 0)
         {
-            <a href="/Album/@album.Id/Add"><h3>Press <i class="fas fa-plus"></i> to add photos</h3></a>
+            <a href="/Album/@album.Id/Add"><h3>Add photos using <i class="fas fa-plus-square"></i></h3></a>
         }
         else
         {
@@ -36,7 +42,7 @@ else
                 @foreach (var image in album.Images)
                 {
                     <div class="photo">
-                        <a href="/ImageView/@album.Id/@image.Id">
+                        <a href="/Album/@album.Id">
                             <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@album.Id/@image.Id" />
                         </a>
                     </div>

@@ -1,9 +1,16 @@
 ﻿@model Album
+<div class="header">
+    <h1 class="center-cell">@Model.Name</h1>  
+    <span></span>
+    <span class="image-button center-cell" id="js-add" title="Add image">
+        <i class="fas fa-plus-square"></i>
+    </span>
+</div>
 @if (Model.Images.Count == 0)
 {
     <div class="center" id="add-tutorial">
         <h2>Press</h2>
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus-square image-button"></i>
         <h2>to add photos</h2>
     </div>
     <script>
@@ -14,15 +21,18 @@
 }
 else
 {
-    <div style="        padding: 10px">
-        <div class="gallery">
-            @foreach (var image in Model.Images)
-            {
-                <a class="item" href="/ImageView/@Model.Id/@image.Id">
-                    <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id" title="@image.DateTaken">
-                </a>
-            }
-        </div>
+    <div class="gallery">
+        @foreach (var image in Model.Images)
+        {
+            <a class="item" href="/ImageView/@Model.Id/@image.Id">
+                <img class="lazyload" src="/PreRender/@image.Width/@image.Height" data-src="/Thumbnail/@Model.Id/@image.Id" title="@image.DateTaken">
+            </a>
+        }
     </div>
 }
+<div class="footer">
+    <span class="image-button center-cell" id="js-navbar-random" title="Delete">
+        <i class="fas fa-trash-alt"></i>
+    </span>
+</div>
 
