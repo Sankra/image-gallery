@@ -31,10 +31,9 @@ else
             <h2>@album.Name</h2>
         }
         </a>
-        @*TODO: reuse in component? Only if same as in album vie*@
         @if (album.Images.Count == 0)
         {
-            <a href="/Album/@album.Id/Add"><h3>Add photos using <i class="fas fa-plus-square"></i></h3></a>
+            <h3>No images</h3>
         }
         else
         {
