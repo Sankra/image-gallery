@@ -145,6 +145,7 @@ a {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto;
+    margin-top: 1vw;
 }
 
 .center-cell {
