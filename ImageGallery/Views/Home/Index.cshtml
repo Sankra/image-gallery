@@ -2,15 +2,13 @@
 <div class="header">
     <h1 class="center-cell">Albums</h1>  
     <span></span>
-    <span class="image-button center-cell" id="js-add" title="Add new album">
-        <i class="fas fa-plus-square"></i>
-    </span>
+    <button onclick="addContent()" class="dropbtn center-cell"><i class="fas fa-plus"></i></button>
 </div>
 @if (Model.Length == 0)
 {
     <div class="center" id="add-album-tutorial">
         <h2>Press</h2>
-        <span class="image-button"><i class="fas fa-plus-square"></i></span>
+        <button onclick="addContent()" class="dropbtn center-cell"><i class="fas fa-plus"></i></button>
         <h2>to add albums</h2>
     </div>
     <script>

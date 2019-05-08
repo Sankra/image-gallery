@@ -18,12 +18,6 @@
     cursor: pointer;
 }
 
-.image-button {
-    font-size: 32px;
-    cursor: pointer;
-    color: Red;
-}
-
 .navbar-random {
     position: absolute;
     top: 10px;
