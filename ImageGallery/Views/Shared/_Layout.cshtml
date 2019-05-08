@@ -37,21 +37,6 @@
         <a href="/" class="logo" title="Home">
             <img src="/@Configuration["Customization:Logo"]" width="40" height="40" alt="Logo image">
         </a>
-        @if (ViewData["AddUrl"] is string)
-        {
-            @if (ViewData["ShowRandom"] is bool) {
-                <span class="navbar-random" id="js-navbar-random" title="Random photo">
-                    <i class="fas fa-dice"></i>
-                </span>
-            }
-        }
-        @if (ViewData["ShowDelete"] is bool)
-        {
-            <span class="navbar-random" id="js-navbar-random" title="Delete">
-                <i class="fas fa-trash-alt"></i>
-            </span>
-        }
-
         <span onclick="openNav()" class="navbar-toggle" title="Menu">
             <i class="fas fa-bars"></i>
         </span>
@@ -77,19 +62,39 @@
 
         function enableSubmit() {
             if(document.getElementById('text-input').value==='') { 
-            document.getElementById('submit').disabled = true; 
-        } else { 
-            document.getElementById('submit').disabled = false;
+                document.getElementById('submit').disabled = true; 
+            } else { 
+                document.getElementById('submit').disabled = false;
+            }
         }
-    }
+
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
         </script>
     @if (ViewData["AddUrl"] is string)
     {
         <script>
-        let navBarAdd = document.getElementById('js-add');
-        navBarAdd.addEventListener('click', function () {
-            window.location.href = '@ViewData["AddUrl"]';
-        });</script>
+            function addContent() {
+                window.location.href = '@ViewData["AddUrl"]';
+            }
+        </script>
     }
     @if (ViewData["AlbumId"] is string albumId)
     {
@@ -107,14 +112,6 @@
 
             });</script>
         }
-
-         @if (ViewData["ShowRandom"] is bool) {
-            <script>
-            let navBarRandom = document.getElementById('js-navbar-random');
-            navBarRandom.addEventListener('click', function () {
-                window.location.href = '/Image/@ViewData["AlbumId"]/Random';
-            });</script>
-         }
     }
 </body>
 </html>

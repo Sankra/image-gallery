@@ -41,11 +41,10 @@ namespace ImageGallery {
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            string cssPath;
-            string[] cssLines;
-            UpdateCssFromConfiguration(env, out cssPath, out cssLines);
-
-            File.WriteAllLines(cssPath, cssLines);
+            // string cssPath;
+            // string[] cssLines;
+            // UpdateCssFromConfiguration(env, out cssPath, out cssLines);
+            // File.WriteAllLines(cssPath, cssLines);
 
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();

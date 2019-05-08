@@ -2,9 +2,17 @@
 <div class="header">
     <h1 class="center-cell">@Model.Name</h1>  
     <span></span>
-    <span class="image-button center-cell" id="js-add" title="Add image">
-        <i class="fas fa-plus-square"></i>
-    </span>
+    <div class="dropdown center-cell">
+        <button onclick="myFunction()" class="dropbtn"><i class="fas fa-ellipsis-h"></i></button>
+        <div id="myDropdown" class="dropdown-content">
+            @if (ViewData["ShowRandom"] is bool) {
+                <a href="/Image/@ViewData["AlbumId"]/Random"><i class="fas fa-dice">&nbsp;Random&nbsp;photo</i></a>
+            }
+            
+            <!-- <a href="#"><i class="fas fa-trash-alt">&nbsp;Delete&nbsp;album</i></a> -->
+        </div>
+    </div>
+    <button onclick="addContent()" class="dropbtn center-cell"><i class="fas fa-plus"></i></button>
 </div>
 @if (Model.Images.Count == 0)
 {
@@ -32,14 +40,3 @@ else
         }
     </div>
 }
-
-<div class="footer">
-    <span class="image-button center-cell" id="js-navbar-delete" title="Delete">
-        <i class="fas fa-trash-alt"></i>
-    </span>
-    <span></span>
-    <span class="image-button center-cell" id="js-navbar-random" title="Random photo">
-        <i class="fas fa-dice"></i>
-    </span>
-</div>
-
